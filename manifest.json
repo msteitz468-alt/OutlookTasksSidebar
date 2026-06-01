@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/office-js-manifest.json",
+  "id": "OutlookTasksSidebar",
+  "version": "1.0.0",
+  "manifestVersion": 1,
+  "name": {
+    "short": "My Tasks",
+    "full": "My Tasks - Pinnable Sidebar"
+  },
+  "description": {
+    "short": "Pinnable tasks sidebar sorted by due date (replaces old Outlook Tasks)",
+    "full": "A pinnable task pane that shows your Microsoft To Do tasks sorted by due date, similar to classic Outlook Tasks."
+  },
+  "developer": {
+    "name": "Your Name",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000/privacy",
+    "termsOfUseUrl": "https://localhost:3000/tos"
+  },
+  "icons": {
+    "16": "assets/icon-16.png",
+    "32": "assets/icon-32.png",
+    "80": "assets/icon-80.png"
+  },
+  "extensions": [
+    {
+      "requirements": {
+        "scopes": ["mail"],
+        "capabilities": [
+          { "name": "Mailbox", "minVersion": "1.5" }
+        ]
+      },
+      "runtimes": [
+        {
+          "id": "TasksSidebar",
+          "type": "SinglePage",
+          "code": {
+            "page": "https://localhost:3000/taskpane.html"
+          },
+          "lifetime": "short",
+          "actions": [
+            {
+              "id": "OpenTasksPane",
+              "type": "openPage",
+              "view": "TaskPaneView",
+              "pinnable": true
+            }
+          ]
+        }
+      ],
+      "ribbons": [
+        {
+          "contexts": ["mailRead"],
+          "tabs": [
+            {
+              "id": "TabDefault",
+              "groups": [
+                {
+                  "id": "TasksGroup",
+                  "label": "Tasks",
+                  "icons": [
+                    { "size": 16, "file": "assets/icon-16.png" },
+                    { "size": 32, "file": "assets/icon-32.png" }
+                  ],
+                  "controls": [
+                    {
+                      "id": "OpenMyTasksButton",
+                      "type": "Button",
+                      "label": "My Tasks",
+                      "supertip": {
+                        "title": "My Tasks",
+                        "description": "Open pinnable tasks sidebar sorted by due date"
+                      },
+                      "actionId": "OpenTasksPane",
+                      "icons": [
+                        { "size": 16, "file": "assets/icon-16.png" },
+                        { "size": 32, "file": "assets/icon-32.png" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
